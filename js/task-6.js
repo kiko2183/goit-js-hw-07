@@ -17,19 +17,18 @@ function createBoxes() {
   const amount = parseInt(input.value);
 
   if (amount >= 1 && amount <= 100) {
-    const boxes = Array.from({ length: amount }, (_, index) => {
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < amount; i++) {
       const box = document.createElement("div");
-      box.style.width = `${30 + index * 10}px`;
-      box.style.height = `${30 + index * 10}px`;
+      box.style.width = `${30 + i * 10}px`;
+      box.style.height = `${30 + i * 10}px`;
       box.style.backgroundColor = getRandomHexColor();
-      return box;
-    });
+      fragment.appendChild(box);
+    }
 
     boxesContainer.innerHTML = "";
-
-    boxes.forEach((box) => {
-      boxesContainer.appendChild(box);
-    });
+    boxesContainer.appendChild(fragment);
 
     input.value = "";
   } else {
